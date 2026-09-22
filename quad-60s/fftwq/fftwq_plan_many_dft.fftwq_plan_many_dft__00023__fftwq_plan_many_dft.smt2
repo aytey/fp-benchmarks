@@ -1,0 +1,6 @@
+(set-logic QF_ABV)
+(declare-const a16 (Array (_ BitVec 32) (_ BitVec 8)))
+(assert (not (bvslt (concat (select a16 (_ bv19 32)) (concat (select a16 (_ bv18 32)) (concat (select a16 (_ bv17 32)) (select a16 (_ bv16 32))))) (_ bv1 32))))
+(check-sat)
+(exit)
+(exit)

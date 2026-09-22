@@ -1,0 +1,7 @@
+(set-logic QF_ABVFP)
+(declare-const a0_d0 (Array (_ BitVec 32) (_ BitVec 8)))
+(assert (not (fp.eq ((_ to_fp 15 113) (concat (select a0_d0 (_ bv79 32)) (concat (select a0_d0 (_ bv78 32)) (concat (select a0_d0 (_ bv77 32)) (concat (select a0_d0 (_ bv76 32)) (concat (select a0_d0 (_ bv75 32)) (concat (select a0_d0 (_ bv74 32)) (concat (select a0_d0 (_ bv73 32)) (concat (select a0_d0 (_ bv72 32)) (concat (select a0_d0 (_ bv71 32)) (concat (select a0_d0 (_ bv70 32)) (concat (select a0_d0 (_ bv69 32)) (concat (select a0_d0 (_ bv68 32)) (concat (select a0_d0 (_ bv67 32)) (concat (select a0_d0 (_ bv66 32)) (concat (select a0_d0 (_ bv65 32)) (select a0_d0 (_ bv64 32)))))))))))))))))) ((_ to_fp 15 113) (concat (_ bv0 64) (_ bv0 64))))))
+(assert (not (not (fp.gt (fp.abs ((_ to_fp 15 113) (concat (select a0_d0 (_ bv79 32)) (concat (select a0_d0 (_ bv78 32)) (concat (select a0_d0 (_ bv77 32)) (concat (select a0_d0 (_ bv76 32)) (concat (select a0_d0 (_ bv75 32)) (concat (select a0_d0 (_ bv74 32)) (concat (select a0_d0 (_ bv73 32)) (concat (select a0_d0 (_ bv72 32)) (concat (select a0_d0 (_ bv71 32)) (concat (select a0_d0 (_ bv70 32)) (concat (select a0_d0 (_ bv69 32)) (concat (select a0_d0 (_ bv68 32)) (concat (select a0_d0 (_ bv67 32)) (concat (select a0_d0 (_ bv66 32)) (concat (select a0_d0 (_ bv65 32)) (select a0_d0 (_ bv64 32))))))))))))))))))) ((_ to_fp 15 113) (concat (_ bv4611545280939032576 64) (_ bv0 64)))))))
+(check-sat)
+(exit)
+(exit)

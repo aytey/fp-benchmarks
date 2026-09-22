@@ -1,0 +1,6 @@
+(set-logic QF_ABVFP)
+(declare-const a1_d0 (Array (_ BitVec 32) (_ BitVec 8)))
+(assert (not (bvult (bvmul (_ bv16 64) (ite (fp.gt (fp.abs ((_ to_fp 15 113) (concat (select a1_d0 (_ bv31 32)) (concat (select a1_d0 (_ bv30 32)) (concat (select a1_d0 (_ bv29 32)) (concat (select a1_d0 (_ bv28 32)) (concat (select a1_d0 (_ bv27 32)) (concat (select a1_d0 (_ bv26 32)) (concat (select a1_d0 (_ bv25 32)) (concat (select a1_d0 (_ bv24 32)) (concat (select a1_d0 (_ bv23 32)) (concat (select a1_d0 (_ bv22 32)) (concat (select a1_d0 (_ bv21 32)) (concat (select a1_d0 (_ bv20 32)) (concat (select a1_d0 (_ bv19 32)) (concat (select a1_d0 (_ bv18 32)) (concat (select a1_d0 (_ bv17 32)) (select a1_d0 (_ bv16 32))))))))))))))))))) (fp.abs ((_ to_fp 15 113) (concat (select a1_d0 (_ bv15 32)) (concat (select a1_d0 (_ bv14 32)) (concat (select a1_d0 (_ bv13 32)) (concat (select a1_d0 (_ bv12 32)) (concat (select a1_d0 (_ bv11 32)) (concat (select a1_d0 (_ bv10 32)) (concat (select a1_d0 (_ bv9 32)) (concat (select a1_d0 (_ bv8 32)) (concat (select a1_d0 (_ bv7 32)) (concat (select a1_d0 (_ bv6 32)) (concat (select a1_d0 (_ bv5 32)) (concat (select a1_d0 (_ bv4 32)) (concat (select a1_d0 (_ bv3 32)) (concat (select a1_d0 (_ bv2 32)) (concat (select a1_d0 (_ bv1 32)) (select a1_d0 (_ bv0 32)))))))))))))))))))) (_ bv1 64) (_ bv0 64))) (_ bv1009 64))))
+(check-sat)
+(exit)
+(exit)

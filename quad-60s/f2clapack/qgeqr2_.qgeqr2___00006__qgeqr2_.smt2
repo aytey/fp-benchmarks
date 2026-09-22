@@ -1,0 +1,7 @@
+(set-logic QF_ABVFP)
+(declare-const a20 (Array (_ BitVec 32) (_ BitVec 8)))
+(define-fun @def0 () (_ BitVec 128) (concat (select a20 (_ bv191 32)) (concat (select a20 (_ bv190 32)) (concat (select a20 (_ bv189 32)) (concat (select a20 (_ bv188 32)) (concat (select a20 (_ bv187 32)) (concat (select a20 (_ bv186 32)) (concat (select a20 (_ bv185 32)) (concat (select a20 (_ bv184 32)) (concat (select a20 (_ bv183 32)) (concat (select a20 (_ bv182 32)) (concat (select a20 (_ bv181 32)) (concat (select a20 (_ bv180 32)) (concat (select a20 (_ bv179 32)) (concat (select a20 (_ bv178 32)) (concat (select a20 (_ bv177 32)) (select a20 (_ bv176 32))))))))))))))))))
+(assert (let ((_let0 ((_ to_fp 15 113) @def0))) (let ((_let1 ((_ to_fp 15 113) (concat (_ bv0 64) (_ bv0 64))))) (not (fp.eq ((_ to_fp 15 113) (ite (or (fp.isNaN _let0) (fp.lt _let0 _let1)) (bvxor (concat (_ bv9223372036854775808 64) (_ bv0 64)) @def0) @def0)) _let1)))))
+(check-sat)
+(exit)
+(exit)
