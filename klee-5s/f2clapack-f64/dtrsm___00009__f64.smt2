@@ -1,0 +1,6 @@
+(set-logic QF_ABVFP)
+(declare-const a91 (Array (_ BitVec 32) (_ BitVec 8)))
+(assert (not (not (not (fp.eq ((_ to_fp 11 53) (concat (select a91 (_ bv47 32)) (concat (select a91 (_ bv46 32)) (concat (select a91 (_ bv45 32)) (concat (select a91 (_ bv44 32)) (concat (select a91 (_ bv43 32)) (concat (select a91 (_ bv42 32)) (concat (select a91 (_ bv41 32)) (select a91 (_ bv40 32)))))))))) ((_ to_fp 11 53) (_ bv0 64)))))))
+(check-sat)
+(exit)
+(exit)

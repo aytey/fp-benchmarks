@@ -1,0 +1,7 @@
+(set-logic QF_ABVFP)
+(declare-const a10 (Array (_ BitVec 32) (_ BitVec 8)))
+(define-fun @def0 () (_ BitVec 128) (concat (select a10 (_ bv63 32)) (concat (select a10 (_ bv62 32)) (concat (select a10 (_ bv61 32)) (concat (select a10 (_ bv60 32)) (concat (select a10 (_ bv59 32)) (concat (select a10 (_ bv58 32)) (concat (select a10 (_ bv57 32)) (concat (select a10 (_ bv56 32)) (concat (select a10 (_ bv55 32)) (concat (select a10 (_ bv54 32)) (concat (select a10 (_ bv53 32)) (concat (select a10 (_ bv52 32)) (concat (select a10 (_ bv51 32)) (concat (select a10 (_ bv50 32)) (concat (select a10 (_ bv49 32)) (select a10 (_ bv48 32))))))))))))))))))
+(assert (let ((_let0 ((_ to_fp 15 113) (concat (_ bv0 64) (_ bv0 64))))) (not (not (fp.gt ((_ to_fp 15 113) (ite (fp.geq ((_ to_fp 15 113) @def0) _let0) @def0 (bvxor (concat (_ bv9223372036854775808 64) (_ bv0 64)) @def0))) _let0)))))
+(check-sat)
+(exit)
+(exit)

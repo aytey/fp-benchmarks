@@ -1,0 +1,7 @@
+(set-logic QF_ABVFP)
+(declare-const a30 (Array (_ BitVec 32) (_ BitVec 8)))
+(assert (let ((_let0 ((_ to_fp 15 113) (concat (select a30 (_ bv15 32)) (concat (select a30 (_ bv14 32)) (concat (select a30 (_ bv13 32)) (concat (select a30 (_ bv12 32)) (concat (select a30 (_ bv11 32)) (concat (select a30 (_ bv10 32)) (concat (select a30 (_ bv9 32)) (concat (select a30 (_ bv8 32)) (concat (select a30 (_ bv7 32)) (concat (select a30 (_ bv6 32)) (concat (select a30 (_ bv5 32)) (concat (select a30 (_ bv4 32)) (concat (select a30 (_ bv3 32)) (concat (select a30 (_ bv2 32)) (concat (select a30 (_ bv1 32)) (select a30 (_ bv0 32)))))))))))))))))))) (or (fp.isNaN _let0) (fp.gt _let0 ((_ to_fp 15 113) (concat (_ bv0 64) (_ bv0 64)))))))
+(assert (let ((_let0 ((_ to_fp 15 113) (concat (select a30 (_ bv15 32)) (concat (select a30 (_ bv14 32)) (concat (select a30 (_ bv13 32)) (concat (select a30 (_ bv12 32)) (concat (select a30 (_ bv11 32)) (concat (select a30 (_ bv10 32)) (concat (select a30 (_ bv9 32)) (concat (select a30 (_ bv8 32)) (concat (select a30 (_ bv7 32)) (concat (select a30 (_ bv6 32)) (concat (select a30 (_ bv5 32)) (concat (select a30 (_ bv4 32)) (concat (select a30 (_ bv3 32)) (concat (select a30 (_ bv2 32)) (concat (select a30 (_ bv1 32)) (select a30 (_ bv0 32)))))))))))))))))))) (not (not (fp.eq _let0 _let0)))))
+(check-sat)
+(exit)
+(exit)
