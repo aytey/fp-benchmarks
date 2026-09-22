@@ -1,0 +1,8 @@
+(set-logic QF_ABVFP)
+(set-info :smt-lib-version 2.0)
+(set-info :status unknown)
+(declare-fun |a9_1| () (Array (_ BitVec 32) (_ BitVec 8) ))
+(assert (= ((_ to_fp 8 24) (concat (select |a9_1|  #x00000003) (concat (select |a9_1|  #x00000002) (concat (select |a9_1|  #x00000001) (select |a9_1|  #x00000000))))) (fp #b0 #b01111111 #b00000000000000000000000))
+)
+(check-sat)
+(exit)

@@ -1,0 +1,6 @@
+(set-logic QF_ABV)
+(declare-const a11 (Array (_ BitVec 32) (_ BitVec 8)))
+(assert (not (not (bvult (bvadd (_ bv18446604713454469120 64) (concat (select a11 (_ bv7 32)) (concat (select a11 (_ bv6 32)) (concat (select a11 (_ bv5 32)) (concat (select a11 (_ bv4 32)) (concat (select a11 (_ bv3 32)) (concat (select a11 (_ bv2 32)) (concat (select a11 (_ bv1 32)) (select a11 (_ bv0 32)))))))))) (_ bv4 64)))))
+(check-sat)
+(exit)
+(exit)

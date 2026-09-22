@@ -1,0 +1,6 @@
+(set-logic QF_ABVFP)
+(declare-const a01 (Array (_ BitVec 32) (_ BitVec 8)))
+(assert (let ((_let0 ((_ to_fp 11 53) (concat (select a01 (_ bv23 32)) (concat (select a01 (_ bv22 32)) (concat (select a01 (_ bv21 32)) (concat (select a01 (_ bv20 32)) (concat (select a01 (_ bv19 32)) (concat (select a01 (_ bv18 32)) (concat (select a01 (_ bv17 32)) (select a01 (_ bv16 32)))))))))))) (let ((_let1 ((_ to_fp 11 53) (concat (select a01 (_ bv15 32)) (concat (select a01 (_ bv14 32)) (concat (select a01 (_ bv13 32)) (concat (select a01 (_ bv12 32)) (concat (select a01 (_ bv11 32)) (concat (select a01 (_ bv10 32)) (concat (select a01 (_ bv9 32)) (select a01 (_ bv8 32)))))))))))) (let ((_let2 ((_ to_fp 11 53) (concat (select a01 (_ bv7 32)) (concat (select a01 (_ bv6 32)) (concat (select a01 (_ bv5 32)) (concat (select a01 (_ bv4 32)) (concat (select a01 (_ bv3 32)) (concat (select a01 (_ bv2 32)) (concat (select a01 (_ bv1 32)) (select a01 (_ bv0 32)))))))))))) (let ((_let3 ((_ to_fp 11 53) (_ bv0 64)))) (not (fp.eq (fp.sqrt RNE (fp.fma RNE _let0 _let0 (fp.fma RNE _let1 _let1 (fp.fma RNE _let2 _let2 _let3)))) _let3)))))))
+(check-sat)
+(exit)
+(exit)
