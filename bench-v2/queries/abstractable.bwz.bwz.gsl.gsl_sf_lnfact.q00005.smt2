@@ -1,0 +1,8 @@
+(set-logic QF_ABVFP)
+(declare-const a00 (Array (_ BitVec 32) (_ BitVec 8)))
+(define-fun @def0 () (_ BitVec 32) (concat (select a00 (_ bv3 32)) (concat (select a00 (_ bv2 32)) (concat (select a00 (_ bv1 32)) (select a00 (_ bv0 32))))))
+(assert (not (bvult @def0 (_ bv171 32))))
+(assert (not (= ((_ to_fp 11 53) (_ bv4744413934860499177 64)) (fp.div RNE (fp.add RNE (fp.add RNE (fp.add RNE ((_ to_fp_unsigned 11 53) RNE @def0) ((_ to_fp 11 53) (_ bv4607182418800017408 64))) ((_ to_fp 11 53) (_ bv13830554455654793216 64))) ((_ to_fp 11 53) (_ bv4620130267728707584 64))) ((_ to_fp 11 53) (_ bv4613303445314885481 64))))))
+(check-sat)
+(exit)
+(exit)

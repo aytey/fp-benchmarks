@@ -1,0 +1,25 @@
+(set-logic QF_ABVFP)
+(set-info :smt-lib-version 2.0)
+(set-info :status unknown)
+(declare-fun |a0_1| () (Array (_ BitVec 32) (_ BitVec 8) ))
+(declare-fun |a1_2| () (Array (_ BitVec 32) (_ BitVec 8) ))
+(declare-fun |a2_3| () (Array (_ BitVec 32) (_ BitVec 8) ))
+(declare-fun |a3_4| () (Array (_ BitVec 32) (_ BitVec 8) ))
+(assert (let ((|?let_k_0| ((_ to_fp 11 53) (concat (select |a0_1|  #x00000007) (concat (select |a0_1|  #x00000006) (concat (select |a0_1|  #x00000005) (concat (select |a0_1|  #x00000004) (concat (select |a0_1|  #x00000003) (concat (select |a0_1|  #x00000002) (concat (select |a0_1|  #x00000001) (select |a0_1|  #x00000000))))))))) )) 
+(let ((|?let_k_1| ((_ to_fp 11 53) (concat (select |a1_2|  #x00000007) (concat (select |a1_2|  #x00000006) (concat (select |a1_2|  #x00000005) (concat (select |a1_2|  #x00000004) (concat (select |a1_2|  #x00000003) (concat (select |a1_2|  #x00000002) (concat (select |a1_2|  #x00000001) (select |a1_2|  #x00000000))))))))))) 
+(let ((|?let_k_2| ((_ to_fp 11 53) (concat (select |a2_3|  #x00000007) (concat (select |a2_3|  #x00000006) (concat (select |a2_3|  #x00000005) (concat (select |a2_3|  #x00000004) (concat (select |a2_3|  #x00000003) (concat (select |a2_3|  #x00000002) (concat (select |a2_3|  #x00000001) (select |a2_3|  #x00000000))))))))))) 
+(let ((|?let_k_3| (concat (select |a0_1|  #x00000007) (concat (select |a0_1|  #x00000006) (concat (select |a0_1|  #x00000005) (concat (select |a0_1|  #x00000004) (concat (select |a0_1|  #x00000003) (concat (select |a0_1|  #x00000002) (concat (select |a0_1|  #x00000001) (select |a0_1|  #x00000000)))))))))) 
+(let ((|?let_k_4| (concat (select |a1_2|  #x00000007) (concat (select |a1_2|  #x00000006) (concat (select |a1_2|  #x00000005) (concat (select |a1_2|  #x00000004) (concat (select |a1_2|  #x00000003) (concat (select |a1_2|  #x00000002) (concat (select |a1_2|  #x00000001) (select |a1_2|  #x00000000)))))))))) 
+(let ((|?let_k_5| (ite (fp.gt |?let_k_0| |?let_k_1|) |?let_k_3| |?let_k_4|))) 
+(let ((|?let_k_6| (concat (select |a2_3|  #x00000007) (concat (select |a2_3|  #x00000006) (concat (select |a2_3|  #x00000005) (concat (select |a2_3|  #x00000004) (concat (select |a2_3|  #x00000003) (concat (select |a2_3|  #x00000002) (concat (select |a2_3|  #x00000001) (select |a2_3|  #x00000000)))))))))) 
+(let ((|?let_k_7| ((_ to_fp 11 53) (concat (select |a3_4|  #x00000007) (concat (select |a3_4|  #x00000006) (concat (select |a3_4|  #x00000005) (concat (select |a3_4|  #x00000004) (concat (select |a3_4|  #x00000003) (concat (select |a3_4|  #x00000002) (concat (select |a3_4|  #x00000001) (select |a3_4|  #x00000000))))))))))) 
+(let ((|?let_k_8| (ite (fp.gt ((_ to_fp 11 53) |?let_k_5|) |?let_k_2|) |?let_k_5| |?let_k_6|))) 
+(let ((|?let_k_9| (concat (select |a3_4|  #x00000007) (concat (select |a3_4|  #x00000006) (concat (select |a3_4|  #x00000005) (concat (select |a3_4|  #x00000004) (concat (select |a3_4|  #x00000003) (concat (select |a3_4|  #x00000002) (concat (select |a3_4|  #x00000001) (select |a3_4|  #x00000000))))))))))
+(and (not (fp.gt (fp #b0 #b01010101011 #b0001001111000100100001000001001110000111000010001110) (fp.add RNE |?let_k_0| |?let_k_2|))) (and (not (fp.gt (fp #b0 #b01010101011 #b0001001111000100100001000001001110000111000010001110) (fp.add RNE |?let_k_0| |?let_k_1|))) (and (not (fp.gt (fp #b0 #b01010101011 #b0001001111000100100001000001001110000111000010001110) (fp.add RNE |?let_k_1| |?let_k_2|))) (and (not (fp.gt (fp #b0 #b01010101011 #b0001001111000100100001000001001110000111000010001110) |?let_k_7|)) (and (not (fp.gt (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000) |?let_k_2|)) (and (not (fp.gt (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000) |?let_k_1|)) (and (not (fp.gt (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000) |?let_k_0|)) (fp.gt (fp #b0 #b10101010001 #b1100010010110001100111000100000111110111000101011111) ((_ to_fp 11 53) (ite (fp.gt ((_ to_fp 11 53) |?let_k_8|) |?let_k_7|) |?let_k_8| |?let_k_9|))))))))))))))))))) )  
+)
+
+
+gsl: ellint.c:322: ERROR: domain error
+Default GSL error handler invoked.
+(check-sat)
+(exit)

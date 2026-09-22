@@ -1,0 +1,8 @@
+(set-logic QF_ABV)
+(set-info :smt-lib-version 2.0)
+(set-info :status unknown)
+(declare-fun |a4_6| () (Array (_ BitVec 32) (_ BitVec 8) ))
+(assert (bvugt  #x0000000000000040 (bvadd  #xFFFF815929800000 (concat (select |a4_6|  #x00000007) (concat (select |a4_6|  #x00000006) (concat (select |a4_6|  #x00000005) (concat (select |a4_6|  #x00000004) (concat (select |a4_6|  #x00000003) (concat (select |a4_6|  #x00000002) (concat (select |a4_6|  #x00000001) (select |a4_6|  #x00000000))))))))))
+)
+(check-sat)
+(exit)

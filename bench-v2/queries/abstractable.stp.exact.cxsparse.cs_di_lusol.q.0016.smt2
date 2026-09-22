@@ -1,0 +1,17 @@
+(set-logic QF_ABVFP)
+(set-info :smt-lib-version 2.0)
+(set-info :status unknown)
+(declare-fun |__klee_fp_bits_6| () (_ BitVec 64))
+(declare-fun |a3_1| () (Array (_ BitVec 32) (_ BitVec 8) ))
+(declare-fun |a1_x_0| () (Array (_ BitVec 32) (_ BitVec 8) ))
+(assert (let ((|?let_k_0| ((_ to_fp 11 53) (concat (select |a1_x_0|  #x00000007) (concat (select |a1_x_0|  #x00000006) (concat (select |a1_x_0|  #x00000005) (concat (select |a1_x_0|  #x00000004) (concat (select |a1_x_0|  #x00000003) (concat (select |a1_x_0|  #x00000002) (concat (select |a1_x_0|  #x00000001) (select |a1_x_0|  #x00000000))))))))) )) 
+(let ((|?let_k_1| (fp.mul RNE (fp.abs |?let_k_0|) ((_ to_fp 11 53) (concat (select |a3_1|  #x00000007) (concat (select |a3_1|  #x00000006) (concat (select |a3_1|  #x00000005) (concat (select |a3_1|  #x00000004) (concat (select |a3_1|  #x00000003) (concat (select |a3_1|  #x00000002) (concat (select |a3_1|  #x00000001) (select |a3_1|  #x00000000)))))))))))) 
+(let ((|?let_k_2| (fp.abs |?let_k_0|))) 
+(let ((|?let_k_3| (fp.isNaN |?let_k_0|))) 
+(let ((|?let_k_4| ((_ to_fp 11 53) (concat (select |a1_x_0|  #x00000017) (concat (select |a1_x_0|  #x00000016) (concat (select |a1_x_0|  #x00000015) (concat (select |a1_x_0|  #x00000014) (concat (select |a1_x_0|  #x00000013) (concat (select |a1_x_0|  #x00000012) (concat (select |a1_x_0|  #x00000011) (select |a1_x_0|  #x00000010)))))))))))
+(and (= (fp.div RNE |?let_k_4| |?let_k_0|) ((_ to_fp 11 53) |__klee_fp_bits_6|)) (and (not (fp.isNaN (fp.fma RNE ((_ to_fp 11 53) (concat (select |a1_x_0|  #x00000027) (concat (select |a1_x_0|  #x00000026) (concat (select |a1_x_0|  #x00000025) (concat (select |a1_x_0|  #x00000024) (concat (select |a1_x_0|  #x00000023) (concat (select |a1_x_0|  #x00000022) (concat (select |a1_x_0|  #x00000021) (select |a1_x_0|  #x00000020))))))))) ((_ to_fp 11 53) (bvxor  #x8000000000000000 |__klee_fp_bits_6|)) ((_ to_fp 11 53) (concat (select |a1_x_0|  #x00000037) (concat (select |a1_x_0|  #x00000036) (concat (select |a1_x_0|  #x00000035) (concat (select |a1_x_0|  #x00000034) (concat (select |a1_x_0|  #x00000033) (concat (select |a1_x_0|  #x00000032) (concat (select |a1_x_0|  #x00000031) (select |a1_x_0|  #x00000030)))))))))))) (and (or (or |?let_k_3| (fp.isNaN |?let_k_1|)) (fp.gt |?let_k_1| |?let_k_2|)) (and (not (fp.isZero |?let_k_0|)) (and (not |?let_k_3|) (and (fp.isNaN ((_ to_fp 11 53) (concat (select |a1_x_0|  #x0000001F) (concat (select |a1_x_0|  #x0000001E) (concat (select |a1_x_0|  #x0000001D) (concat (select |a1_x_0|  #x0000001C) (concat (select |a1_x_0|  #x0000001B) (concat (select |a1_x_0|  #x0000001A) (concat (select |a1_x_0|  #x00000019) (select |a1_x_0|  #x00000018)))))))))) (fp.isNaN |?let_k_4|))))))))))) )  
+)
+
+
+(check-sat)
+(exit)

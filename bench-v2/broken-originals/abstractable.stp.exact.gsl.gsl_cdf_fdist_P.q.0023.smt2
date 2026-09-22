@@ -1,0 +1,23 @@
+(set-logic QF_ABVFP)
+(set-info :smt-lib-version 2.0)
+(set-info :status unknown)
+(declare-fun |a2_0| () (Array (_ BitVec 32) (_ BitVec 8) ))
+(declare-fun |a1_1| () (Array (_ BitVec 32) (_ BitVec 8) ))
+(declare-fun |a0_2| () (Array (_ BitVec 32) (_ BitVec 8) ))
+(declare-fun |__klee_fp_bits_7| () (_ BitVec 64))
+(declare-fun |__klee_fp_bits_8| () (_ BitVec 64))
+(assert (let ((|?let_k_0| (fp.mul RNE ((_ to_fp 11 53) (concat (select |a1_1|  #x00000007) (concat (select |a1_1|  #x00000006) (concat (select |a1_1|  #x00000005) (concat (select |a1_1|  #x00000004) (concat (select |a1_1|  #x00000003) (concat (select |a1_1|  #x00000002) (concat (select |a1_1|  #x00000001) (select |a1_1|  #x00000000))))))))) (fp #b0 #b01111111110 #b0000000000000000000000000000000000000000000000000000)) )) 
+(let ((|?let_k_1| (fp.mul RNE ((_ to_fp 11 53) (concat (select |a2_0|  #x00000007) (concat (select |a2_0|  #x00000006) (concat (select |a2_0|  #x00000005) (concat (select |a2_0|  #x00000004) (concat (select |a2_0|  #x00000003) (concat (select |a2_0|  #x00000002) (concat (select |a2_0|  #x00000001) (select |a2_0|  #x00000000))))))))) (fp #b0 #b01111111110 #b0000000000000000000000000000000000000000000000000000)))) 
+(let ((|?let_k_2| ((_ to_fp 11 53) (concat (select |a2_0|  #x00000007) (concat (select |a2_0|  #x00000006) (concat (select |a2_0|  #x00000005) (concat (select |a2_0|  #x00000004) (concat (select |a2_0|  #x00000003) (concat (select |a2_0|  #x00000002) (concat (select |a2_0|  #x00000001) (select |a2_0|  #x00000000))))))))))) 
+(let ((|?let_k_3| ((_ to_fp 11 53) (concat (select |a1_1|  #x00000007) (concat (select |a1_1|  #x00000006) (concat (select |a1_1|  #x00000005) (concat (select |a1_1|  #x00000004) (concat (select |a1_1|  #x00000003) (concat (select |a1_1|  #x00000002) (concat (select |a1_1|  #x00000001) (select |a1_1|  #x00000000))))))))))) 
+(let ((|?let_k_4| ((_ to_fp 11 53) (concat (select |a0_2|  #x00000007) (concat (select |a0_2|  #x00000006) (concat (select |a0_2|  #x00000005) (concat (select |a0_2|  #x00000004) (concat (select |a0_2|  #x00000003) (concat (select |a0_2|  #x00000002) (concat (select |a0_2|  #x00000001) (select |a0_2|  #x00000000))))))))))) 
+(let ((|?let_k_5| (fp.div RNE |?let_k_4| (fp.add RNE (fp.div RNE |?let_k_2| |?let_k_3|) |?let_k_4|)))) 
+(let ((|?let_k_6| (fp.div RNE |?let_k_2| |?let_k_3|)))
+(and (= |?let_k_0| ((_ to_fp 11 53) |__klee_fp_bits_8|)) (and (= (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000001000000) ((_ to_fp 11 53) |__klee_fp_bits_7|)) (and (not (fp.isZero |?let_k_1|)) (and (not (fp.isZero |?let_k_0|)) (and (not (and (and (fp.gt (fp #b0 #b10000000010 #b0100000000000000000000000000000000000000000000000000) |?let_k_0|) (fp.gt |?let_k_1| (fp #b0 #b10000001111 #b1000011010100000000000000000000000000000000000000000))) (fp.gt (fp.div RNE |?let_k_1| (fp.add RNE |?let_k_0| |?let_k_1|)) |?let_k_5|))) (and (not (and (fp.gt |?let_k_0| (fp #b0 #b10000001111 #b1000011010100000000000000000000000000000000000000000)) (fp.gt (fp #b0 #b10000000010 #b0100000000000000000000000000000000000000000000000000) |?let_k_1|))) (and (not (= |?let_k_5| (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000))) (and (not (fp.isZero |?let_k_5|)) (and (fp.gt |?let_k_6| |?let_k_4|) (not (= |__klee_fp_bits_7| |__klee_fp_bits_8|))))))))))))))))) )  
+)
+
+
+gsl: beta.c:56: ERROR: domain error
+Default GSL error handler invoked.
+(check-sat)
+(exit)

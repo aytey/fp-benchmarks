@@ -1,0 +1,8 @@
+(set-logic QF_ABVFP)
+(set-info :smt-lib-version 2.0)
+(set-info :status unknown)
+(declare-fun |a7_1| () (Array (_ BitVec 32) (_ BitVec 8) ))
+(assert (not (fp.isZero ((_ to_fp 11 53) (concat (select |a7_1|  #x0000006F) (concat (select |a7_1|  #x0000006E) (concat (select |a7_1|  #x0000006D) (concat (select |a7_1|  #x0000006C) (concat (select |a7_1|  #x0000006B) (concat (select |a7_1|  #x0000006A) (concat (select |a7_1|  #x00000069) (select |a7_1|  #x00000068)))))))))))
+)
+(check-sat)
+(exit)
