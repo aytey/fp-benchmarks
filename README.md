@@ -19,6 +19,55 @@ the per-query files.
 `quad-60s/` by library: f2clapack 995, sundials-f128 3,505, cuba 97,
 fftwq 5,093.
 
+## The four-width corpora: bench-v1, bench-v2, bench-v3
+
+The three directories above are binary128, and `klee-5s` also binary64.
+The corpus an evaluation should actually read is **`bench-v3`**, which
+spans four widths, because what this material is asked to show is what
+width does.
+
+| | queries | 16 | 32 | 64 | 128 | no float |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| `bench-v1/` | 7,598 | 899 | 1,401 | 2,578 | 1,910 | 810 |
+| `bench-v2/` | 7,598 | 899 | 1,401 | 2,601 | 1,910 | 787 |
+| **`bench-v3/`** | **7,196** | **889** | **1,326** | **2,535** | **1,667** | **779** |
+
+`bench-v1` and `bench-v2` are here because campaigns were run on them,
+not because they should be run again: 1,148 of bench-v2's queries are
+weaker than the ones KLEE asked. The commit that adds `bench-v3` says
+why, and it is a capture bug rather than anything repairable in a file.
+
+Three things separate these from the quad captures.
+
+**Eighteen library/build labels, not four.** `gsl`, `openlibm`, `blis`,
+`cxsparse`, `osqp` and `gmp` at the width their source is written in,
+plus the matched arms that make width a controlled variable rather than
+a confounded one: `f2clapack` at binary16, binary32, binary64 and
+binary128 from one source tree, `sundials` at binary16, binary64 and
+binary128, `cmsisdsp` at binary16 with a binary32 control, and `fftw`
+against `fftwq`. `osqp` was measured and later dropped from `fp_bench`,
+so its 83 queries have no counterpart in today's suite.
+
+**Four capture solvers, not one.** STP exact, STP with the
+floating-point abstraction, STP with both abstractions, and Bitwuzla,
+each at a 120 s budget per driver and a 60 s cap per solver call. The
+`provenance` column of `manifest.tsv` names the arms a query came from
+and `family` names the printer that spelled it: the two printers spell
+the same query differently, so a query is kept once per printer, merged
+on the canonical `hash`. Four capture solvers narrow the conditioning
+described above; they do not remove it.
+
+**Sampled, not exhaustive.** Every binary128 query is kept. Every other
+driver contributes at most 25, spread across its size range.
+
+`group` splits each corpus into `abstractable` and `control`. The
+control is every query holding no floating-point operation an
+abstraction could take -- 1,386 of bench-v3, of which 779 mention no
+float at all, among them every one of `fftw`'s and `fftwq`'s. A control
+query is not an empty one: the bit-vector reasoning is still there, and
+a bit-vector abstraction still engages on it.
+
+
 ## The two things to know before using these
 
 **The capture solver decides which queries exist.** A query the solver cannot
@@ -67,6 +116,17 @@ carries none. The queries are otherwise untouched.
 
 ## Reproducing a capture
 
+The drivers are `fp_bench` (`github.com/aytey/klee_fp_bench`), generated
+from each library's own headers by `common/gen-drivers.py` rather than
+written by hand; its `SELECTION.md` records why these libraries and not
+the sixteen others that were surveyed and measured. The executor is
+`/mnt/baranem/klee-float/3.2`, a clone of `aytey/klee` on branch
+`aytey_20260824_fp_port` -- KLEE 3.2 with the floating-point port, whose
+2026-08-28 tip is the first that executes binary128 symbolically instead
+of terminating on it. It is not `klee-float` (KLEE 1.3, srg-imperial),
+which is a different tree for different work and is easy to reach for by
+name.
+
     export KLEE_BUILD=/mnt/baranem/quad-2026/klee-build   # NOT 3.2-buildtest
     export FP_BENCH_WORK=/mnt/baranem/fp_bench-work
     BUDGET=120 MAX_SOLVER_TIME=60 SOLVER=bitwuzla \
@@ -92,3 +152,8 @@ Liew-KLEE dumps) are third-party and live in
 `/mnt/baranem/smt2_problems/non-incremental`. They are the right anchor for
 a solver comparison precisely because nobody in the comparison generated
 them.
+
+The 8-bit material is not here either, and is not KLEE's: the QF_FP
+submission `20260824-LatendresseFP-AndrewTeylu` is 55 problems written
+at five formats (4+4, 5+11, 8+24, 11+53, 15+113) and lives with the
+SMT-LIB submission.
