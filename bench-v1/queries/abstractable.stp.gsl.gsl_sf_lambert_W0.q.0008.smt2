@@ -1,0 +1,17 @@
+(set-logic QF_ABVFP)
+(set-info :smt-lib-version 2.0)
+(set-info :status unknown)
+(declare-fun |a0_0| () (Array (_ BitVec 32) (_ BitVec 8) ))
+(declare-fun |__klee_fp_bits_0| () (_ BitVec 64))
+(declare-fun |__klee_fp_bits_1| () (_ BitVec 64))
+(assert (let ((|?let_k_0| (fp.sqrt RNE (fp.mul RNE (fp.add RNE ((_ to_fp 11 53) (concat (select |a0_0|  #x00000007) (concat (select |a0_0|  #x00000006) (concat (select |a0_0|  #x00000005) (concat (select |a0_0|  #x00000004) (concat (select |a0_0|  #x00000003) (concat (select |a0_0|  #x00000002) (concat (select |a0_0|  #x00000001) (select |a0_0|  #x00000000))))))))) (fp #b0 #b01111111101 #b0111100010110101011000110110001011001110111100111000)) (fp #b0 #b10000000001 #b0101101111110000101010001011000101000101011101101001))) )) 
+(let ((|?let_k_1| ((_ to_fp 11 53) (concat (select |a0_0|  #x00000007) (concat (select |a0_0|  #x00000006) (concat (select |a0_0|  #x00000005) (concat (select |a0_0|  #x00000004) (concat (select |a0_0|  #x00000003) (concat (select |a0_0|  #x00000002) (concat (select |a0_0|  #x00000001) (select |a0_0|  #x00000000))))))))))) 
+(let ((|?let_k_2| (fp.add RNE |?let_k_1| (fp #b0 #b01111111101 #b0111100010110101011000110110001011001110111100111000))))
+(and (= (fp.fma RNE |?let_k_0| (fp.fma RNE |?let_k_0| (fp.add RNE (fp.div RNE (fp.mul RNE |?let_k_0| (fp #b0 #b10000000010 #b0110000000000000000000000000000000000000000000000000)) (fp #b0 #b10000000101 #b0010000000000000000000000000000000000000000000000000)) (fp #b1 #b01111111101 #b0101010101010101010101010101010101010101010101010101)) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)) (fp #b1 #b01111111111 #b0000000000000000000000000000000000000000000000000000)) ((_ to_fp 11 53) |__klee_fp_bits_1|)) (and (= (fp #b0 #b01111111100 #b0110111111110101100111110101101000101010100101111001) ((_ to_fp 11 53) |__klee_fp_bits_0|)) (and (fp.gt (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000) |?let_k_1|) (and (not (fp.gt (fp #b0 #b01111110101 #b0000011000100100110111010010111100011010100111111100) |?let_k_2|)) (and (not (fp.isZero |?let_k_2|)) (and (not (fp.gt (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000) |?let_k_2|)) (and (not (fp.isZero |?let_k_1|)) (not (= |__klee_fp_bits_0| |__klee_fp_bits_1|))))))))))) )  
+)
+
+
+gsl: lambert.c:225: ERROR: gsl_sf_lambert_W0_e(x, &result)
+Default GSL error handler invoked.
+(check-sat)
+(exit)

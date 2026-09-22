@@ -1,0 +1,8 @@
+(set-logic QF_ABVFP)
+(set-info :smt-lib-version 2.0)
+(set-info :status unknown)
+(declare-fun |a1_1| () (Array (_ BitVec 32) (_ BitVec 8) ))
+(assert (fp.gt (fp #b0 #b01111111000 #b0100011110101110000101000111101011100001010001111011) (fp.abs (fp.add RNE ((_ to_fp 11 53) (concat (select |a1_1|  #x00000007) (concat (select |a1_1|  #x00000006) (concat (select |a1_1|  #x00000005) (concat (select |a1_1|  #x00000004) (concat (select |a1_1|  #x00000003) (concat (select |a1_1|  #x00000002) (concat (select |a1_1|  #x00000001) (select |a1_1|  #x00000000))))))))) (fp #b1 #b01111111111 #b0000000000000000000000000000000000000000000000000000))))
+)
+(check-sat)
+(exit)

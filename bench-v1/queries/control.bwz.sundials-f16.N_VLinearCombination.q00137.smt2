@@ -1,0 +1,8 @@
+(set-logic QF_ABV)
+(declare-const a20 (Array (_ BitVec 32) (_ BitVec 8)))
+(define-fun @def0 () (_ BitVec 64) (concat (select a20 (_ bv7 32)) (concat (select a20 (_ bv6 32)) (concat (select a20 (_ bv5 32)) (concat (select a20 (_ bv4 32)) (concat (select a20 (_ bv3 32)) (concat (select a20 (_ bv2 32)) (concat (select a20 (_ bv1 32)) (select a20 (_ bv0 32))))))))))
+(assert (not (= (_ bv139397781520384 64) @def0)))
+(assert (not (bvult @def0 (_ bv140177250975744 64))))
+(check-sat)
+(exit)
+(exit)

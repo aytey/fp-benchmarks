@@ -1,0 +1,8 @@
+(set-logic QF_ABVFP)
+(declare-const a0_b0 (Array (_ BitVec 32) (_ BitVec 8)))
+(define-fun @def0 () (_ BitVec 64) (concat (select a0_b0 (_ bv7 32)) (concat (select a0_b0 (_ bv6 32)) (concat (select a0_b0 (_ bv5 32)) (concat (select a0_b0 (_ bv4 32)) (concat (select a0_b0 (_ bv3 32)) (concat (select a0_b0 (_ bv2 32)) (concat (select a0_b0 (_ bv1 32)) (select a0_b0 (_ bv0 32))))))))))
+(define-fun @def1 () (_ BitVec 64) (ite (fp.leq ((_ to_fp 11 53) @def0) ((_ to_fp 11 53) (_ bv0 64))) (bvxor (_ bv9223372036854775808 64) @def0) @def0))
+(assert (not (not (fp.isNaN ((_ to_fp 11 53) (ite (fp.isNaN ((_ to_fp 11 53) @def1)) @def1 (_ bv4607182418800017408 64)))))))
+(check-sat)
+(exit)
+(exit)

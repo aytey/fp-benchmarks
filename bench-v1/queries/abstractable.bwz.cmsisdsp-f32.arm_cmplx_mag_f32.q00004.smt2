@@ -1,0 +1,7 @@
+(set-logic QF_ABVFP)
+(declare-const a01 (Array (_ BitVec 32) (_ BitVec 8)))
+(define-fun @def0 () (_ FloatingPoint 8 24) (let ((_let0 ((_ to_fp 8 24) (concat (select a01 (_ bv11 32)) (concat (select a01 (_ bv10 32)) (concat (select a01 (_ bv9 32)) (select a01 (_ bv8 32)))))))) (let ((_let1 ((_ to_fp 8 24) (concat (select a01 (_ bv15 32)) (concat (select a01 (_ bv14 32)) (concat (select a01 (_ bv13 32)) (select a01 (_ bv12 32)))))))) (fp.fma RNE _let0 _let0 (fp.mul RNE _let1 _let1)))))
+(assert (not (and (not (fp.isNaN @def0)) (not (fp.lt @def0 ((_ to_fp 8 24) (_ bv0 32)))))))
+(check-sat)
+(exit)
+(exit)
