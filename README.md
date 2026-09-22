@@ -144,6 +144,49 @@ delete each other's KLEE output mid-run. `capture-quad.sh` on 0009 does this.
 Note also that `timeout` around the script kills the script and not its KLEE
 grandchild; a capture run should be checked for orphans afterwards.
 
+## Recreating a corpus end to end
+
+`tools/` holds every script that turned KLEE executions into the
+`bench-v*` directories, taken as they ran. Each carries its reasoning in
+its own header; the paths in them are this machine's.
+
+The chain, as `bench-v3` was made:
+
+    ./capture5.sh 16 120 60                                   # ~1 h 40 at 16-way
+    python3 inventory.py capture5 capture5/inventory.tsv 16
+    python3 curate.py capture5/inventory.tsv capture5 fp-benchmarks/bench-v3
+    python3 check_bits_bindings.py bench-v3/queries bench-v3/manifest.tsv
+
+`capture5.sh` runs each driver under the three STP arms; `capture4.sh`
+is the same with Bitwuzla's arm as well, and is what bench-v1 and v2
+came from. `inventory.py` records what every query contains and hashes
+it canonically, so the same query captured under two arms is one query.
+`curate.py` makes the corpus: de-duplicate within a printer family, cap
+each driver at 25 spread across its size range, keep every binary128
+query, carry a control group. `check_bits_bindings.py` is the gate --
+every `__klee_fp_bits_N` bound exactly once and never to two floats,
+exit 1 otherwise -- and `bench-v3` passes it at 0/0.
+
+STP's dump is cut by `split_stp_dump.py` here and Bitwuzla's by
+`fp_bench`'s own `common/split-queries.py`, because the two dumpers
+write to different places in different shapes.
+
+### What recreating one still needs, and is not in this repository
+
+**The libraries as bitcode.** `capture*.sh` reads `drivers.txt` and
+`obj/<driver>.bc` from `/mnt/baranem/fp_bench-work/<lib>`, built by
+`fp_bench`'s `build-lib.sh`, `gen-drivers.py` and `build-drivers.sh`.
+Adding a library to the suite is a day's work and none of it is here.
+
+**The executor.** A KLEE that executes binary128 symbolically and
+carries `--stp-portable-float-bits`: `aytey/klee` branch
+`aytey_20260824_fp_port` at `938ddd7c`, built against an STP that has
+the abstraction flags the `fpabs` and `fpbv` arms pass. `FP_PORT_2026.md`
+in that tree documents the port and the build.
+
+**`capture-quad.sh`**, which made `quad-60s` and `klee-5s`, ran on
+another machine and is not here.
+
 ## Not included
 
 The public SMT-LIB families this work also uses (`QF_FP/griggio`,
