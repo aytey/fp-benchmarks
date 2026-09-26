@@ -23,7 +23,8 @@ from multiprocessing import Pool
 
 MAN, QDIR, OUT = sys.argv[1], sys.argv[2], sys.argv[3]
 WORKERS = int(sys.argv[4]) if len(sys.argv) > 4 else 16
-BWZ = "/home/avj/clones/bitwuzla/main/build/src/main/bitwuzla"
+BWZ = os.environ.get("BITWUZLA_BIN",
+                     "/home/avj/clones/bitwuzla/main/build/src/main/bitwuzla")
 
 DECL = re.compile(r"\((?:declare-fun|declare-const)\s+\|?([^\s|()]+)\|?")
 WS = re.compile(r"\s+")

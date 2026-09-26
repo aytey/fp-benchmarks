@@ -25,15 +25,30 @@
 # makes the STP builder match. --write-no-tests everywhere, because the
 # relaxed encoding does not survive KLEE's model validation and no arm needs
 # test cases.
+#
+# Paths come from the environment, with the layout this was run on as the
+# default, so another machine overrides rather than edits:
+#
+#   FP_BENCH_WORK  the built libraries: <lib>/drivers.txt and <lib>/obj/*.bc
+#   KLEE_BIN       a KLEE with STP, Bitwuzla and binary16/binary128 support
+#   FP_BENCH_SRC   the fp_bench checkout, for common/split-queries.py
+#   CAPTURE_OUT    where the dumps land (tens of GB; fastest on a RAM disk)
+#   SPLIT_STP      the splitter for STP's dump, which arrives on stderr
 set -u
 JOBS=${1:-16}
 BUDGET=${2:-120}
 CAP=${3:-60}
-W=/mnt/baranem/fp_bench-work
-KLEE=/mnt/baranem/klee-float/3.2-buildfpabs/bin/klee
-SPLIT_STP=/mnt/baranem/split_stp_dump.py
-SPLIT_BWZ=/home/avj/clones/fp_bench/common/split-queries.py
-OUT=/mnt/baranem/capture4
+HERE=$(cd "$(dirname "$0")" && pwd)
+W=${FP_BENCH_WORK:-/mnt/baranem/fp_bench-work}
+KLEE=${KLEE_BIN:-/mnt/baranem/klee-float/3.2-buildfpabs/bin/klee}
+SPLIT_STP=${SPLIT_STP:-$HERE/split_stp_dump.py}
+SPLIT_BWZ=${SPLIT_BWZ:-${FP_BENCH_SRC:-/home/avj/clones/fp_bench}/common/split-queries.py}
+OUT=${CAPTURE_OUT:-/mnt/baranem/capture4}
+
+for p in "$KLEE" "$SPLIT_STP" "$SPLIT_BWZ"; do
+  [ -e "$p" ] || { echo "not found: $p (see the variables above)" >&2; exit 1; }
+done
+[ -d "$W" ] || { echo "not found: $W (FP_BENCH_WORK)" >&2; exit 1; }
 mkdir -p "$OUT"
 
 # library:stride -- the strides are sweep-all.sh's, which exist so the big
@@ -47,7 +62,7 @@ LIBS=(
   "cxsparse:1" "osqp:1" "blis:4" "openlibm:3" "gsl:10" "gmp:2"
 )
 
-: > /tmp/capture4.jobs
+: > "$OUT/jobs.txt"
 for entry in "${LIBS[@]}"; do
   lib=${entry%%:*}; stride=${entry##*:}
   [ -f "$W/$lib/drivers.txt" ] || { echo "skip $lib (not built)"; continue; }
@@ -56,13 +71,17 @@ for entry in "${LIBS[@]}"; do
     n=$((n + 1))
     [ $(( (n - 1) % stride )) -eq 0 ] || continue
     [ -f "$W/$lib/obj/$d.bc" ] || continue
-    for arm in exact fpabs fpbv bwz; do echo "$lib $d $arm" >> /tmp/capture4.jobs; done
+    for arm in exact fpabs fpbv bwz; do echo "$lib $d $arm" >> "$OUT/jobs.txt"; done
   done < "$W/$lib/drivers.txt"
 done
-echo "jobs: $(wc -l < /tmp/capture4.jobs)  (${JOBS}-way, budget ${BUDGET}s, cap ${CAP}s)"
+echo "jobs: $(wc -l < "$OUT/jobs.txt")  (${JOBS}-way, budget ${BUDGET}s, cap ${CAP}s)"
 
 run_one() {
   lib=$1; drv=$2; arm=$3
+  # With an empty job list GNU xargs runs the command once with no arguments,
+  # and this function would then rm -rf "$OUT///" -- the whole output
+  # directory. -r below stops that; this is the belt.
+  [ -n "$lib" ] && [ -n "$drv" ] && [ -n "$arm" ] || { echo "run_one: empty job" >&2; return 1; }
   d=$OUT/$arm/$lib/$drv
   rm -rf "$d"; mkdir -p "$d"
   case $arm in
@@ -92,7 +111,7 @@ run_one() {
 }
 export -f run_one; export OUT W KLEE SPLIT_STP SPLIT_BWZ BUDGET CAP
 
-xargs -a /tmp/capture4.jobs -P "$JOBS" -L1 bash -c 'run_one "$@"' _ > "$OUT/yield.txt" 2>&1
+xargs -r -a "$OUT/jobs.txt" -P "$JOBS" -L1 bash -c 'run_one "$@"' _ > "$OUT/yield.txt" 2>&1
 echo "== captured, by arm:"
 for arm in exact fpabs fpbv bwz; do
   echo "  $arm: $(find $OUT/$arm -name '*.smt2' 2>/dev/null | wc -l) queries"
