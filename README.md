@@ -1,5 +1,7 @@
 # Floating-point SMT-LIB benchmarks captured for the FP-abstraction work
 
+> Part of the [floating-point benchmark work](https://github.com/aytey/fp-repro): that repository pins this one with the KLEE fork, the corpus, the replay harness and STP, and has the build recipe and the steps in order.
+
 Every file here is one SMT-LIB2 query, dumped from a KLEE symbolic execution
 of a real numerical library and split into a standalone file that replays
 against any solver. Nothing here is hand-written and nothing is synthetic.
